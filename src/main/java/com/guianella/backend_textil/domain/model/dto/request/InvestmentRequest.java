@@ -1,6 +1,7 @@
 package com.guianella.backend_textil.domain.model.dto.request;
 
 import com.guianella.backend_textil.infraestructure.adapter.util.UnitSales;
+import com.guianella.backend_textil.infraestructure.config.validation.ValueOfEnum;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -17,8 +18,9 @@ import java.util.List;
 @Setter
 public class InvestmentRequest {
 
-    @NotNull(message = "unitsales no puede estar en blanco")
-    private UnitSales unitSales;
+    @NotNull(message = "La unidad no puede estar en blanco")
+    @ValueOfEnum(enumClass = UnitSales.class, message = "Unidades invalidas")
+    private String unitSales;
 
     @Valid
     private List<FabricRequest> fabrics = new ArrayList<>();
