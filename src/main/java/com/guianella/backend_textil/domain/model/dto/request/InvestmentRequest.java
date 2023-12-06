@@ -25,7 +25,4 @@ public class InvestmentRequest {
     @Valid
     private List<FabricRequest> fabrics = new ArrayList<>();
 
-//    public UnitSales getUnitSalesEnum() {
-//        return UnitSales.valueOf(unitSales);
-//    }
 }
