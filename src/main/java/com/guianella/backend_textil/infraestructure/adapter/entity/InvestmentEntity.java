@@ -12,8 +12,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +28,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity
 @Table(name = "investment")
 public class InvestmentEntity {
@@ -55,5 +58,10 @@ public class InvestmentEntity {
 
     @OneToOne(mappedBy = "idInvestment")
     private ManufactureEntity manufacture;
+
+    @PrePersist
+    private void onCreate(){
+        createDate = Instant.now();
+    }
 
 }
