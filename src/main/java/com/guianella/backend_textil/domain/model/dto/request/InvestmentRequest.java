@@ -1,9 +1,10 @@
 package com.guianella.backend_textil.domain.model.dto.request;
 
+import com.guianella.backend_textil.domain.model.constant.CommonConstant;
 import com.guianella.backend_textil.infraestructure.adapter.util.UnitSales;
 import com.guianella.backend_textil.infraestructure.config.validation.ValueOfEnum;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ import java.util.List;
 @Setter
 public class InvestmentRequest {
 
-    @NotNull(message = "La unidad no puede estar en blanco")
+    @NotBlank(message = CommonConstant.NOT_NULL_MESSAGE_ERROR)
     @ValueOfEnum(enumClass = UnitSales.class, message = "Unidades invalidas")
     private String unitSales;
 

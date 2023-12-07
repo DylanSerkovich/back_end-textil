@@ -19,7 +19,7 @@ public class ColorFabricSpringJpaAdapter implements ColorFabricPersistencePort {
 
     @Override
     public ColorFabric getById(Long id) {
-        var optionalColor = colorFabricRepository.findById(id);
-        return ColorDboMapper.toDomain(optionalColor.get());
+        var optionalColor = colorFabricRepository.findById(id).orElse(null);
+        return ColorDboMapper.toDomain(optionalColor);
     }
 }

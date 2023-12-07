@@ -19,7 +19,7 @@ public class TypeFabricSpringJpaAdapter implements TypeFabricPersistencePort {
 
     @Override
     public TypeFabric getById(Long id) {
-        var optionalTypeFabric = typeFabricRepository.findById(id);
-        return TypeFabricDboMapper.toDomain(optionalTypeFabric.get());
+        var optionalTypeFabric = typeFabricRepository.findById(id).orElse(null);
+        return TypeFabricDboMapper.toDomain(optionalTypeFabric);
     }
 }
