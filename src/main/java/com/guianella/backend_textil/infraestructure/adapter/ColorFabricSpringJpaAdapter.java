@@ -29,4 +29,12 @@ public class ColorFabricSpringJpaAdapter implements ColorFabricPersistencePort {
             );
         return ColorDboMapper.toDomain(optionalColor);
     }
+
+    @Override
+    public ColorFabric create(ColorFabric request) {
+        var colorToSave = ColorDboMapper.toDbo(request);
+        var colorSaved = colorFabricRepository.save(colorToSave);
+
+        return ColorDboMapper.toDomain(colorSaved);
+    }
 }
