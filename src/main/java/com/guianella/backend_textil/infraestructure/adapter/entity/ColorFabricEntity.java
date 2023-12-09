@@ -33,7 +33,7 @@ public class ColorFabricEntity {
     @Column(name = "name_color", nullable = false, length = 20)
     private String nameColor;
 
-    @Column(name = "hexadecimal", nullable = false, length = 6)
+    @Column(name = "hexadecimal", length = 6)
     private String hexadecimal;
 
     @OneToMany(mappedBy = "idColorFabric", fetch = FetchType.LAZY)
