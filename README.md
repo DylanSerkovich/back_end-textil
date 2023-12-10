@@ -10,6 +10,7 @@ This is the second version of [guianella's full-stack project](https://github.co
 - `Features 1`: Make the raw material investment record, adding the amount of fabric purchased
 - `Features 2`: Add production (manufacturing) costs by registered investment
 - `Features 3`: Enter the number of garments produced per model. Registration will be by investment
+- `Features 4`: Add, list and modify type fabric and color fabric
 
 ## :heavy_check_mark: Technologies used
 -  Java 17
