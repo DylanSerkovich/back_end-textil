@@ -8,5 +8,6 @@ public interface TypeFabricPersistencePort {
     TypeFabric create(TypeFabric typeFabric);
     TypeFabric getById(Long id);
     List<TypeFabric> getAll();
+    TypeFabric update(TypeFabric typeFabric);
 
 }

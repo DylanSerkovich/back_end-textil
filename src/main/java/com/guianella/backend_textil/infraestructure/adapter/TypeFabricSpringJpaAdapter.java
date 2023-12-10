@@ -47,4 +47,10 @@ public class TypeFabricSpringJpaAdapter implements TypeFabricPersistencePort {
                 .map(TypeFabricDboMapper::toDomain)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public TypeFabric update(TypeFabric typeFabric) {
+        var typeToUpdate = TypeFabricDboMapper.toDbo(typeFabric);
+        return TypeFabricDboMapper.toDomain(typeFabricRepository.save(typeToUpdate));
+    }
 }

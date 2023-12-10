@@ -34,4 +34,12 @@ public class TypeFabricManagementService implements TypeFabricService {
                 .map(TypeFabricDtoMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public TypeFabricDto update(TypeFabricRequest request, long id) {
+        var typeToUpdate = TypeFabricRequestMapper.toDomain(request);
+        typeToUpdate.setId(id);
+        typeToUpdate.setTypeName(request.getTypeName());
+        return TypeFabricDtoMapper.toDto(typeFabricPersistencePort.update(typeToUpdate));
+    }
 }

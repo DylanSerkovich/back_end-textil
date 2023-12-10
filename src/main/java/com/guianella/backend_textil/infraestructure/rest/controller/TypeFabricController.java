@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,5 +35,11 @@ public class TypeFabricController {
     public ResponseEntity<ListDto> getAll(){
         List<TypeFabricDto> dto = typeFabricService.getAll();
         return new ResponseEntity<>(new ListDto(HttpStatus.OK.value(),dto.size(),dto),HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TypeFabricDto> update(@RequestBody @Validated TypeFabricRequest typeFabricRequest,
+                                                @PathVariable Long id){
+        return new ResponseEntity<>(typeFabricService.update(typeFabricRequest,id),HttpStatus.OK);
     }
 }
