@@ -9,6 +9,9 @@ import com.guianella.backend_textil.infraestructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 public class ColorFabricSpringJpaAdapter implements ColorFabricPersistencePort {
@@ -17,6 +20,14 @@ public class ColorFabricSpringJpaAdapter implements ColorFabricPersistencePort {
 
     public ColorFabricSpringJpaAdapter(ColorFabricRepository colorFabricRepository) {
         this.colorFabricRepository = colorFabricRepository;
+    }
+
+    @Override
+    public ColorFabric create(ColorFabric request) {
+        var colorToSave = ColorDboMapper.toDbo(request);
+        var colorSaved = colorFabricRepository.save(colorToSave);
+
+        return ColorDboMapper.toDomain(colorSaved);
     }
 
     @Override
@@ -31,10 +42,11 @@ public class ColorFabricSpringJpaAdapter implements ColorFabricPersistencePort {
     }
 
     @Override
-    public ColorFabric create(ColorFabric request) {
-        var colorToSave = ColorDboMapper.toDbo(request);
-        var colorSaved = colorFabricRepository.save(colorToSave);
-
-        return ColorDboMapper.toDomain(colorSaved);
+    public List<ColorFabric> getAll() {
+        return colorFabricRepository.findAll()
+                .stream()
+                .map(ColorDboMapper::toDomain)
+                .collect(Collectors.toList());
     }
+
 }
