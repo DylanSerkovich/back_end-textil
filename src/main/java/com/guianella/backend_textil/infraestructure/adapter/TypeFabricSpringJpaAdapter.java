@@ -9,6 +9,9 @@ import com.guianella.backend_textil.infraestructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 public class TypeFabricSpringJpaAdapter implements TypeFabricPersistencePort {
@@ -20,6 +23,13 @@ public class TypeFabricSpringJpaAdapter implements TypeFabricPersistencePort {
     }
 
     @Override
+    public TypeFabric create(TypeFabric request) {
+        var typeToSave = TypeFabricDboMapper.toDbo(request);
+        var typeSaved= typeFabricRepository.save(typeToSave);
+        return TypeFabricDboMapper.toDomain(typeSaved);
+    }
+
+    @Override
     public TypeFabric getById(Long id) {
         var optionalTypeFabric = typeFabricRepository.findById(id).orElseThrow(
                 ()-> new NotFoundException(
@@ -28,5 +38,13 @@ public class TypeFabricSpringJpaAdapter implements TypeFabricPersistencePort {
                         TypeFabricConstant.NOT_FOUNT_MESSAGE_USER
                 ));
         return TypeFabricDboMapper.toDomain(optionalTypeFabric);
+    }
+
+    @Override
+    public List<TypeFabric> getAll() {
+        return typeFabricRepository.findAll()
+                .stream()
+                .map(TypeFabricDboMapper::toDomain)
+                .collect(Collectors.toList());
     }
 }
