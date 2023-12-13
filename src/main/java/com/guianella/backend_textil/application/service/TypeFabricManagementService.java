@@ -42,4 +42,9 @@ public class TypeFabricManagementService implements TypeFabricService {
         typeToUpdate.setTypeName(request.getTypeName());
         return TypeFabricDtoMapper.toDto(typeFabricPersistencePort.update(typeToUpdate));
     }
+
+    @Override
+    public void deleteById(Long id) {
+        typeFabricPersistencePort.deleteById(id);
+    }
 }

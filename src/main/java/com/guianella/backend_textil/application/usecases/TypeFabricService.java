@@ -9,5 +9,6 @@ public interface TypeFabricService {
     TypeFabricDto createNew(TypeFabricRequest request);
     List<TypeFabricDto> getAll();
     TypeFabricDto update(TypeFabricRequest request,long id);
+    void deleteById(Long id);
 
 }

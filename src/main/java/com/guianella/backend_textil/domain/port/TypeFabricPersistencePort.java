@@ -9,5 +9,6 @@ public interface TypeFabricPersistencePort {
     TypeFabric getById(Long id);
     List<TypeFabric> getAll();
     TypeFabric update(TypeFabric typeFabric);
+    void deleteById(Long id);
 
 }
