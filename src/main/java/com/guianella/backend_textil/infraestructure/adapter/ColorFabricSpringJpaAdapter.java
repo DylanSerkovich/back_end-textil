@@ -66,7 +66,7 @@ public class ColorFabricSpringJpaAdapter implements ColorFabricPersistencePort {
                     HttpStatus.BAD_REQUEST,
                     "Color Fabric No Allow to Delete",
                     String.format(ColorFabricConstant.CURRENT_NOT_ALLOW_TO_DELETE_DEVELOP,id),
-                    ColorFabricConstant.CURRENT_NOT_ALLOW_TO_DELETE_DEVELOP
+                    ColorFabricConstant.CURRENT_NOT_ALLOW_TO_DELETE_USER
 
             );
         }
