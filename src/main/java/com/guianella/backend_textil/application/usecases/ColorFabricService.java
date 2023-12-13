@@ -8,4 +8,6 @@ import java.util.List;
 public interface ColorFabricService {
     ColorFabricDto createNew(ColorFabricRequest request);
     List<ColorFabricDto> getAll();
+    ColorFabricDto update(ColorFabricRequest request, long id);
+    void deleteById(Long id);
 }

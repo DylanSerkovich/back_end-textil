@@ -33,4 +33,16 @@ public class ColorFabricManagementService implements ColorFabricService {
                 .map(ColorFabricDtoMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public ColorFabricDto update(ColorFabricRequest request, long id) {
+        var colorToUpdate = ColorFabricRequestMapper.toDomain(request);
+        colorToUpdate.setId(id);
+        return ColorFabricDtoMapper.toDto(colorFabricPersistencePort.update(colorToUpdate));
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        colorFabricPersistencePort.deleteById(id);
+    }
 }

@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,5 +36,16 @@ public class ColorFabricController {
     public ResponseEntity<ListDto> getAll(){
         List<ColorFabricDto> dto = colorFabricService.getAll();
         return new ResponseEntity<>(new ListDto(HttpStatus.OK.value(),dto.size(),dto),HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ColorFabricDto> update(@RequestBody @Validated ColorFabricRequest colorFabricRequest,
+                                                 @PathVariable Long id){
+        return new ResponseEntity<>( colorFabricService.update(colorFabricRequest,id), HttpStatus.OK);
+    }
+
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        colorFabricService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
