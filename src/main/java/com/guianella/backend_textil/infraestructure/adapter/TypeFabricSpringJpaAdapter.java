@@ -65,7 +65,7 @@ public class TypeFabricSpringJpaAdapter implements TypeFabricPersistencePort {
                    HttpStatus.BAD_REQUEST,
                     "Type Fabric No Allow to Delete",
                     String.format(TypeFabricConstant.CURRENT_NOT_ALLOW_TO_DELETE_DEVELOP,id),
-                    TypeFabricConstant.CURRENT_NOT_ALLOW_TO_DELETE_DEVELOP
+                    TypeFabricConstant.CURRENT_NOT_ALLOW_TO_DELETE_USER
 
             );
         }
