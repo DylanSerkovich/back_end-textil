@@ -1,6 +1,6 @@
 package com.guianella.backend_textil.infraestructure.rest.advice;
 
-import com.guianella.backend_textil.infraestructure.exception.NotFoundException;
+import com.guianella.backend_textil.infraestructure.exception.GenericClientException;
 import com.guianella.backend_textil.infraestructure.exception.ValidationException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
@@ -20,12 +20,12 @@ public class ControllerAdvice {
         return new ResponseEntity<>(validationException,new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ProblemDetail> handNotFoundException(NotFoundException ex){
-        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+    @ExceptionHandler(GenericClientException.class)
+    public ResponseEntity<ProblemDetail> handNotFoundException(GenericClientException ex){
+        ProblemDetail problemDetail = ProblemDetail.forStatus(ex.getStatus());
         problemDetail.setTitle(ex.getTitle());
         problemDetail.setDetail(ex.getUserMessage());
         problemDetail.setProperty("developerMessage",ex.getDeveloperMessage());
-        return new ResponseEntity<>(problemDetail,HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(problemDetail,ex.getStatus());
     }
 }

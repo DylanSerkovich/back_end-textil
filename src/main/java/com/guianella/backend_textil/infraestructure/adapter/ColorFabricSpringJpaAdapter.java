@@ -5,8 +5,9 @@ import com.guianella.backend_textil.domain.model.constant.ColorFabricConstant;
 import com.guianella.backend_textil.domain.port.ColorFabricPersistencePort;
 import com.guianella.backend_textil.infraestructure.adapter.mapper.ColorDboMapper;
 import com.guianella.backend_textil.infraestructure.adapter.repository.ColorFabricRepository;
-import com.guianella.backend_textil.infraestructure.exception.NotFoundException;
+import com.guianella.backend_textil.infraestructure.exception.GenericClientException;
 import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +34,8 @@ public class ColorFabricSpringJpaAdapter implements ColorFabricPersistencePort {
     @Override
     public ColorFabric getById(Long id) {
         var optionalColor = colorFabricRepository.findById(id).orElseThrow(
-                ()-> new NotFoundException(
+                ()-> new GenericClientException(
+                        HttpStatus.NOT_FOUND,
                         "Not Found Color Fabric",
                         String.format(ColorFabricConstant.NOT_FOUNT_MESSAGE_DEVELOP,id),
                         ColorFabricConstant.NOT_FOUNT_MESSAGE_USER)
